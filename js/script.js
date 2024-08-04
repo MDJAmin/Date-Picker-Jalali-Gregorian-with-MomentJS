@@ -7,8 +7,8 @@ function renderCalendar() {
     const daysContainer = document.querySelector('.days');
     daysContainer.innerHTML = '';
 
-    const startOfMonth = useJalaali ? currentDate.clone().startOf('jMonth') : currentDate.clone().startOf('month');
-    const endOfMonth = useJalaali ? currentDate.clone().endOf('jMonth') : currentDate.clone().endOf('month');
+    const startOfMonth = currentDate.clone().startOf('month');
+    const endOfMonth = currentDate.clone().endOf('month');
     const startDay = startOfMonth.day();
     const totalDays = endOfMonth.date();
 
@@ -25,7 +25,7 @@ function renderCalendar() {
         dayCell.className = 'day';
         dayCell.textContent = i;
         dayCell.addEventListener('click', () => {
-            const selectedDate = useJalaali ? currentDate.clone().jDate(i) : currentDate.clone().date(i);
+            const selectedDate = currentDate.clone().date(i);
             document.getElementById('selected-date').value = useJalaali ? selectedDate.format('jYYYY/jMM/jDD') : selectedDate.format('YYYY/MM/DD');
             document.getElementById('calendar').style.display = 'none';
         });
@@ -33,20 +33,15 @@ function renderCalendar() {
     }
 }
 
-function showCurrentDay() {
-    const currentDay = moment().format('dddd, MMMM Do YYYY');
-    document.getElementById('current-day').textContent = currentDay;
-}
-
 // Events
 
 document.getElementById('prev-month').addEventListener('click', () => {
-    currentDate.subtract(1, useJalaali ? 'jMonth' : 'month');
+    currentDate.subtract(1, 'month');
     renderCalendar();
 });
 
 document.getElementById('next-month').addEventListener('click', () => {
-    currentDate.add(1, useJalaali ? 'jMonth' : 'month');
+    currentDate.add(1, 'month');
     renderCalendar();
 });
 
@@ -60,17 +55,14 @@ document.addEventListener('click', (event) => {
     }
 });
 
-document.querySelector('.bx-revision').addEventListener('click', () => {
+document.getElementById('clear-input').addEventListener('click', () => {
     document.getElementById('selected-date').value = '';
-    showCurrentDay();
 });
 
-document.getElementById('toggle-date').addEventListener('click', () => {
+function switchCalendarType() {
     useJalaali = !useJalaali;
-    document.getElementById('toggle-date').innerHTML = useJalaali ? "Lunar <i class='bx bxs-moon'></i>" : "Solar <i class='bx bxs-sun'></i>";
     currentDate = useJalaali ? moment(currentDate.format('YYYY-MM-DD'), 'YYYY-MM-DD').format('jYYYY/jMM/jDD') : moment(currentDate.format('jYYYY-jMM-jDD'), 'jYYYY-jMM-jDD');
     renderCalendar();
-});
+}
 
-showCurrentDay();
 renderCalendar();
