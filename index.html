@@ -12,20 +12,19 @@
 </head>
 
 <body>
-    <div>
-        <p>Current day is : </p>
-        <i></i>
-        <input type="text" placeholder="Select Your Date" readonly>
-        <div>
-            <div>
-                <button>Prev</button>
-                <span></span>
-                <button>Next</button>
+    <div id="datepicker">
+        <p class="current">Current day is : </p>
+        <i class='bx bx-revision'></i>
+        <input type="text" id="selected-date" placeholder="Select Your Date" readonly>
+        <div id="calendar">
+            <div class="month-nav">
+                <button id="prev-month">Prev</button>
+                <span id="current-month"></span>
+                <button id="next-month">Next</button>
             </div>
-            <div></div>
+            <div class="days"></div>
         </div>
     </div>
-
     <script src="js/script.js"></script>
 </body>
 
