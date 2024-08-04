@@ -13,7 +13,7 @@
 
 <body>
     <div id="datepicker">
-        <p class="current">Current day is : </p>
+        <p class="current">Current day is : <span id="current-day"></span></p>
         <i class='bx bx-revision'></i>
         <input type="text" id="selected-date" placeholder="Select Your Date" readonly>
         <div id="calendar">
@@ -23,6 +23,7 @@
                 <button id="next-month">Next</button>
             </div>
             <div class="days"></div>
+            <button id="toggle-date">Solar <i class='bx bxs-sun'></i></button>
         </div>
     </div>
     <script src="js/script.js"></script>
