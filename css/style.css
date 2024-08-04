@@ -1,113 +1,116 @@
-
 * {
-    font-family: "Anton", sans-serif !important;
-    font-weight: bolder;
-    user-select: none;
-  }
-  
-  body {
-    background-color: black;
-  }
-  
-  #datepicker {
-    display: inline-block;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width: fit-content;
-    margin-top: 5%;
-  }
-  
-  #datepicker input {
-    width: 200px;
-    padding: 10px;
-    margin: 20px;
-    border-radius: 10px;
-    position: relative;
-    top: 0;
-    transition: all 0.5s;
-  }
-  
-  #datepicker:hover > input {
-    scale: 1.1;
-  }
-  
-  #datepicker:hover > i {
-    scale: 1.4;
-    right: 25px;
-  }
-  
-  .current {
-    text-align: center;
-    position: absolute;
-    top: -11px;
-    left: 25px;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.308);
-  }
-  
-  .bx-revision {
-    position: absolute;
-    z-index: 1;
-    right: 30px;
-    font-size: 1.3rem;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-  
-  #calendar {
-    width: 350px;
-    position: absolute;
-    top: 75px;
-    border: 1px solid #ccc;
-    background: #fff;
-    padding: 10px;
-    display: none;
-    border-radius: 10px;
-  }
-  
-  .month-nav {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .days {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .day {
-    width: 14.28%;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-  
-  .day:hover {
-    scale: 1.1;
-    background-color: #eee;
-  }
-  
-  button {
-    background-color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-  
-  button:hover {
-    background-color: #000000;
-    color: white;
-  }
-  button:focus {
-    scale: 1.1;
-    background-color: #000000;
-    color: white;
-  }
-  
- 
+  font-family: "Anton", sans-serif !important;
+  font-weight: bolder;
+  user-select: none;
+}
+
+body {
+  background-color: black;
+}
+
+#datepicker {
+  display: inline-block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: fit-content;
+  margin-top: 5%;
+}
+
+#datepicker input {
+  width: 200px;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+  position: relative;
+  top: 0;
+  transition: all 0.5s;
+}
+
+#datepicker:hover > input {
+  scale: 1.1;
+}
+
+#datepicker:hover > i {
+  scale: 1.4;
+  right: 25px;
+}
+
+#datepicker:hover > .current {
+  color: white;
+}
+
+.current {
+  text-align: center;
+  position: absolute;
+  top: -11px;
+  left: 25px;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.308);
+  transition: all 0.5s;
+}
+
+.bx-revision {
+  position: absolute;
+  z-index: 1;
+  right: 30px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+#calendar {
+  width: 350px;
+  position: absolute;
+  top: 75px;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 10px;
+  display: none;
+  border-radius: 10px;
+}
+
+.month-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day {
+  width: 14.28%;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.day:hover {
+  scale: 1.1;
+  background-color: #eee;
+}
+
+button {
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+button:hover {
+  background-color: #000000;
+  color: white;
+}
+
+button:focus {
+  scale: 1.1;
+  background-color: #000000;
+  color: white;
+}
