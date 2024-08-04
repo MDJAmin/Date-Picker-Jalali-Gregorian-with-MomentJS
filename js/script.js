@@ -33,6 +33,11 @@ function renderCalendar() {
     }
 }
 
+// Display the current system date
+function displayCurrentDate() {
+    document.getElementById('current-day').textContent = useJalaali ? currentDate.format('jYYYY/jMM/jDD') : currentDate.format('YYYY/MM/DD');
+}
+
 // Events
 
 document.getElementById('prev-month').addEventListener('click', () => {
@@ -65,4 +70,6 @@ function switchCalendarType() {
     renderCalendar();
 }
 
+// Initialize the calendar and display the current date
 renderCalendar();
+displayCurrentDate();
