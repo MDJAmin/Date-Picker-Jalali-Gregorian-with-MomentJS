@@ -32,3 +32,33 @@ function renderCalendar() {
         daysContainer.appendChild(dayCell);
     }
 }
+
+// Events
+
+document.getElementById('prev-month').addEventListener('click', () => {
+    currentDate.subtract(1, 'month');
+    renderCalendar();
+});
+
+document.getElementById('next-month').addEventListener('click', () => {
+    currentDate.add(1, 'month');
+    renderCalendar();
+});
+
+document.getElementById('selected-date').addEventListener('click', () => {
+    document.getElementById('calendar').style.display = 'block';
+});
+
+document.addEventListener('click', (event) => {
+    if (!document.getElementById('datepicker').contains(event.target)) {
+        document.getElementById('calendar').style.display = 'none';
+    }
+});
+
+function switchCalendarType() {
+    useJalaali = !useJalaali;
+    currentDate = useJalaali ? moment(currentDate.format('YYYY-MM-DD'), 'YYYY-MM-DD').format('jYYYY/jMM/jDD') : moment(currentDate.format('jYYYY-jMM-jDD'), 'jYYYY-jMM-jDD');
+    renderCalendar();
+}
+
+renderCalendar();
