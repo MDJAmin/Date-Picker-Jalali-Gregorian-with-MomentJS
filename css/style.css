@@ -120,8 +120,8 @@ button:focus {
   background-color: white;
   border: none;
   position: absolute;
-  left: 65%;
-  top: 8.2%;
+  right: -33%;
+  top: 29.5%;
   border-radius: 4px;
   cursor: pointer;
   padding: 7px 10px;
