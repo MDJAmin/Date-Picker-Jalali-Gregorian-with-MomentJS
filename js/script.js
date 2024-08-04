@@ -71,15 +71,22 @@ document.querySelector(".bx-revision").addEventListener("click", () => {
   updateCurrentDay();
 });
 
-function switchCalendarType() {
+document.getElementById("toggle-date").addEventListener("click", () => {
   useJalaali = !useJalaali;
-  currentDate = useJalaali
-    ? moment(currentDate.format("YYYY-MM-DD"), "YYYY-MM-DD").format(
-        "jYYYY/jMM/jDD"
-      )
-    : moment(currentDate.format("jYYYY-jMM-jDD"), "jYYYY-jMM-jDD");
-  renderCalendar();
-}
+  document.getElementById("toggle-date").innerHTML = useJalaali
+    ? `Lunar <i class='bx bxs-moon'></i>`
+    : `Solar <i class='bx bxs-sun'></i>`;
+  switchCalendarType();
+});
+
+// function switchCalendarType() {
+//   currentDate = useJalaali
+//     ? moment(currentDate.format("YYYY-MM-DD"), "YYYY-MM-DD").format(
+//         "jYYYY/jMM/jDD"
+//       )
+//     : moment(currentDate.format("jYYYY-jMM-jDD"), "jYYYY-jMM-jDD");
+//   renderCalendar();
+// }
 
 updateCurrentDay();
 renderCalendar();

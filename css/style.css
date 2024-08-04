@@ -114,3 +114,34 @@ button:focus {
   background-color: #000000;
   color: white;
 }
+
+/* Existing CSS styles */
+.calendar-button {
+  background-color: white;
+  border: none;
+  position: absolute;
+  left: 65%;
+  top: 8.2%;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: all 0.5s;
+  border: solid 1px transparent;
+}
+
+.calendar-button:hover {
+  background-color: #000000;
+  color: white;
+  border: solid 1px white;
+}
+
+.calendar-button:focus {
+  scale: 1.1;
+  background-color: #000000;
+  color: white;
+  border: solid 1px white;
+}
+
+.calendar-button i {
+  margin-left: 5px;
+}
