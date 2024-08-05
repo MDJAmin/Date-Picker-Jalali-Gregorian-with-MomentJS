@@ -6,6 +6,7 @@
 
 body {
   background-color: black;
+  display: flex;
 }
 
 #datepicker {
@@ -117,22 +118,21 @@ button:focus {
 
 /* Existing CSS styles */
 .calendar-button {
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   border: none;
-  position: absolute;
-  right: -33%;
-  top: 29.5%;
+  position: relative;
   border-radius: 4px;
   cursor: pointer;
   padding: 7px 10px;
   transition: all 0.5s;
+  color: white;
   border: solid 1px transparent;
 }
 
 .calendar-button:hover {
-  background-color: #000000;
-  color: white;
-  border: solid 1px white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: solid 1px rgb(0, 0, 0);
 }
 
 .calendar-button:focus {
@@ -145,3 +145,5 @@ button:focus {
 .calendar-button i {
   margin-left: 5px;
 }
+
+
