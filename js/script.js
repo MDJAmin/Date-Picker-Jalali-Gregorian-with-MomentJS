@@ -1,90 +1,117 @@
 "use strict";
 
-let currentDate = moment();
+const datepickers = document.querySelectorAll('.datepicker-input');
 let useJalaali = false;
+let currentDate = {};
 
-function renderCalendar() {
-  const daysContainer = document.querySelector(".days");
-  daysContainer.innerHTML = "";
+datepickers.forEach(picker => {
+  const id = picker.dataset.id;
+  currentDate[id] = moment();
 
-  const startOfMonth = currentDate.clone().startOf("month");
-  const endOfMonth = currentDate.clone().endOf("month");
-  const startDay = startOfMonth.day();
-  const totalDays = endOfMonth.date();
+  // Create calendar elements
+  const calendarContainer = document.createElement('div');
+  calendarContainer.className = 'calendar';
+  picker.parentElement.appendChild(calendarContainer);
 
-  document.getElementById("current-month").textContent = useJalaali
-    ? currentDate.format("jMMMM jYYYY")  
-    : currentDate.format("MMMM YYYY");  
+  const monthNav = document.createElement('div');
+  monthNav.className = 'month-nav';
+  calendarContainer.appendChild(monthNav);
 
-  for (let i = 0; i < startDay; i++) {
-    const emptyCell = document.createElement("div");
-    emptyCell.className = "day";
-    daysContainer.appendChild(emptyCell);
+  const prevMonthBtn = document.createElement('button');
+  prevMonthBtn.className = 'prev-month';
+  prevMonthBtn.textContent = 'Prev';
+  monthNav.appendChild(prevMonthBtn);
+
+  const currentMonthSpan = document.createElement('span');
+  currentMonthSpan.className = 'current-month';
+  monthNav.appendChild(currentMonthSpan);
+
+  const nextMonthBtn = document.createElement('button');
+  nextMonthBtn.className = 'next-month';
+  nextMonthBtn.textContent = 'Next';
+  monthNav.appendChild(nextMonthBtn);
+
+  const daysContainer = document.createElement('div');
+  daysContainer.className = 'days';
+  calendarContainer.appendChild(daysContainer);
+
+  const toggleDateBtn = document.createElement('button');
+  toggleDateBtn.className = 'toggle-date';
+  toggleDateBtn.innerHTML = `Solar <i class='bx bxs-sun'></i>`;
+  calendarContainer.appendChild(toggleDateBtn);
+
+  function renderCalendar() {
+    daysContainer.innerHTML = "";
+    const startOfMonth = currentDate[id].clone().startOf("month");
+    const endOfMonth = currentDate[id].clone().endOf("month");
+    const startDay = startOfMonth.day();
+    const totalDays = endOfMonth.date();
+
+    currentMonthSpan.textContent = useJalaali
+        ? currentDate[id].format("jMMMM jYYYY")
+        : currentDate[id].format("MMMM YYYY");
+
+    for (let i = 0; i < startDay; i++) {
+      const emptyCell = document.createElement("div");
+      emptyCell.className = "day";
+      daysContainer.appendChild(emptyCell);
+    }
+
+    for (let i = 1; i <= totalDays; i++) {
+      const dayCell = document.createElement("div");
+      dayCell.className = "day";
+      dayCell.textContent = i;
+      dayCell.addEventListener("click", () => {
+        const selectedDate = currentDate[id].clone().date(i);
+        picker.value = useJalaali
+            ? selectedDate.format("jYYYY/jMM/jDD")
+            : selectedDate.format("YYYY/MM/DD");
+        calendarContainer.style.display = "none";
+      });
+      daysContainer.appendChild(dayCell);
+    }
   }
 
-  for (let i = 1; i <= totalDays; i++) {
-    const dayCell = document.createElement("div");
-    dayCell.className = "day";
-    dayCell.textContent = i;
-    dayCell.addEventListener("click", () => {
-      const selectedDate = currentDate.clone().date(i);
-      document.getElementById("selected-date").value = useJalaali
-        ? selectedDate.format("jYYYY/jMM/jDD") 
-        : selectedDate.format("YYYY/MM/DD");  
-      document.getElementById("calendar").style.display = "none";
-    });
-    daysContainer.appendChild(dayCell);
+  function updateCurrentDay() {
+    const currentDay = moment().format("dddd, MMMM Do YYYY");
+    picker.placeholder = `Current day is : ${currentDay}`;
   }
-}
 
-function updateCurrentDay() {
-  const currentDay = moment().format("dddd, MMMM Do YYYY");
-  document.querySelector(
-    ".current"
-  ).textContent = `Current day is : ${currentDay}`;
-}
+  prevMonthBtn.addEventListener("click", () => {
+    currentDate[id].subtract(1, "month");
+    renderCalendar();
+  });
 
-// Events
+  nextMonthBtn.addEventListener("click", () => {
+    currentDate[id].add(1, "month");
+    renderCalendar();
+  });
 
-document.getElementById("prev-month").addEventListener("click", () => {
-  currentDate.subtract(1, "month");
-  renderCalendar();
-});
+  picker.addEventListener("click", () => {
+    calendarContainer.style.display = "block";
+  });
 
-document.getElementById("next-month").addEventListener("click", () => {
-  currentDate.add(1, "month");
-  renderCalendar();
-});
+  document.addEventListener("click", (event) => {
+    if (!calendarContainer.contains(event.target) && !picker.contains(event.target)) {
+      calendarContainer.style.display = "none";
+    }
+  });
 
-document.getElementById("selected-date").addEventListener("click", () => {
-  document.getElementById("calendar").style.display = "block";
-});
+  toggleDateBtn.addEventListener("click", () => {
+    useJalaali = !useJalaali;
+    toggleDateBtn.innerHTML = useJalaali
+        ? `Lunar <i class='bx bxs-moon'></i>`
+        : `Solar <i class='bx bxs-sun'></i>`;
+    switchCalendarType();
+  });
 
-document.addEventListener("click", (event) => {
-  if (!document.getElementById("datepicker").contains(event.target)) {
-    document.getElementById("calendar").style.display = "none";
+  function switchCalendarType() {
+    currentDate[id] = useJalaali
+        ? moment(currentDate[id].format("YYYY-MM-DD"), "YYYY-MM-DD").locale("fa")
+        : moment(currentDate[id].format("jYYYY/jMM/jDD"), "jYYYY/jMM/jDD").locale("en");
+    renderCalendar();
   }
-});
 
-document.querySelector(".bx-revision").addEventListener("click", () => {
-  document.getElementById("selected-date").value = "";
   updateCurrentDay();
-});
-
-document.getElementById("toggle-date").addEventListener("click", () => {
-  useJalaali = !useJalaali;
-  document.getElementById("toggle-date").innerHTML = useJalaali
-    ? `Lunar <i class='bx bxs-moon'></i>`
-    : `Solar <i class='bx bxs-sun'></i>`;
-  switchCalendarType();
-});
-
-function switchCalendarType() {
-  currentDate = useJalaali
-    ? moment(currentDate.format("YYYY-MM-DD"), "YYYY-MM-DD").locale("fa")
-    : moment(currentDate.format("jYYYY/jMM/jDD"), "jYYYY/jMM/jDD").locale("en");
   renderCalendar();
-}
-
-updateCurrentDay();
-renderCalendar();
+});

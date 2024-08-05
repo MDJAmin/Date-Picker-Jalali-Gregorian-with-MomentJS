@@ -13,71 +13,14 @@
 </head>
 
 <body>
-    <div id="datepicker">
-        <p class="current">Current day is : </p>
-        <i class='bx bx-revision'></i>
-        <input type="text" id="selected-date" placeholder="Select Your Date" readonly>
-        <div id="calendar">
-            <div class="month-nav">
-                <button id="prev-month">Prev</button>
-                <span id="current-month"></span>
-                <button id="next-month">Next</button>
-            </div>
-            <div class="days"></div>
-            <button id="toggle-date" class="calendar-button">Solar <i class='bx bxs-sun'></i></button>
-        </div>
-    </div>
-    <script src="js/script.js"></script>
+<div class="datepicker-container">
+    <input type="text" class="datepicker-input" data-id="1" readonly>
+    <input type="text" class="datepicker-input" data-id="2" readonly>
+    <input type="text" class="datepicker-input" data-id="3" readonly>
+    <input type="text" class="datepicker-input" data-id="4" readonly>
+    <input type="text" class="datepicker-input" data-id="5" readonly>
+</div>
+<script src="js/script.js"></script>
 </body>
 
 </html>
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jalali-moment/2.7.1/jalali-moment.min.js"></script>
-    <title>Test Jalali-Moment</title>
-</head>
-<body>
-    <p id="test-gregorian"></p>
-    <p id="test-jalali"></p>
-    <script>
-        // Test Gregorian date
-        const gregorianDate = moment().format('YYYY/MM/DD');
-        document.getElementById('test-gregorian').textContent = `Gregorian Date: ${gregorianDate}`;
-
-        // Test Jalali date
-        const jalaliDate = moment().locale('fa').format('jYYYY/jMM/jDD');
-        document.getElementById('test-jalali').textContent = `Jalali Date: ${jalaliDate}`;
-    </script>
-</body>
-</html> -->
-
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jalali-moment/2.7.1/jalali-moment.min.js"></script>
-    <title>Test Jalali-Moment</title>
-</head>
-<body>
-    <p id="test-gregorian"></p>
-    <p id="test-jalali"></p>
-    <script>
-        // Test Gregorian date
-        const gregorianDate = moment().format('YYYY/MM/DD');
-        document.getElementById('test-gregorian').textContent = `Gregorian Date: ${gregorianDate}`;
-
-        // Test Jalali date
-        const jalaliDate = jalaliMoment().format('jYYYY/jMM/jDD');
-        document.getElementById('test-jalali').textContent = `Jalali Date: ${jalaliDate}`;
-    </script>
-</body>
-</html> -->
