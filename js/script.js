@@ -1,42 +1,41 @@
 "use strict";
 
-const datepickers = document.querySelectorAll('.datepicker-input');
+const datepickers = document.querySelectorAll(".datepicker-input");
 let useJalaali = false;
 let currentDate = {};
 
-datepickers.forEach(picker => {
+datepickers.forEach((picker) => {
   const id = picker.dataset.id;
   currentDate[id] = moment();
 
-  // Create calendar elements
-  const calendarContainer = document.createElement('div');
-  calendarContainer.className = 'calendar';
+  const calendarContainer = document.createElement("div");
+  calendarContainer.className = "calendar";
   picker.parentElement.appendChild(calendarContainer);
 
-  const monthNav = document.createElement('div');
-  monthNav.className = 'month-nav';
+  const monthNav = document.createElement("div");
+  monthNav.className = "month-nav";
   calendarContainer.appendChild(monthNav);
 
-  const prevMonthBtn = document.createElement('button');
-  prevMonthBtn.className = 'prev-month';
-  prevMonthBtn.textContent = 'Prev';
+  const prevMonthBtn = document.createElement("button");
+  prevMonthBtn.className = "prev-month";
+  prevMonthBtn.textContent = "Prev";
   monthNav.appendChild(prevMonthBtn);
 
-  const currentMonthSpan = document.createElement('span');
-  currentMonthSpan.className = 'current-month';
+  const currentMonthSpan = document.createElement("span");
+  currentMonthSpan.className = "current-month";
   monthNav.appendChild(currentMonthSpan);
 
-  const nextMonthBtn = document.createElement('button');
-  nextMonthBtn.className = 'next-month';
-  nextMonthBtn.textContent = 'Next';
+  const nextMonthBtn = document.createElement("button");
+  nextMonthBtn.className = "next-month";
+  nextMonthBtn.textContent = "Next";
   monthNav.appendChild(nextMonthBtn);
 
-  const daysContainer = document.createElement('div');
-  daysContainer.className = 'days';
+  const daysContainer = document.createElement("div");
+  daysContainer.className = "days";
   calendarContainer.appendChild(daysContainer);
 
-  const toggleDateBtn = document.createElement('button');
-  toggleDateBtn.className = 'toggle-date';
+  const toggleDateBtn = document.createElement("button");
+  toggleDateBtn.className = "toggle-date";
   toggleDateBtn.innerHTML = `Solar <i class='bx bxs-sun'></i>`;
   calendarContainer.appendChild(toggleDateBtn);
 
@@ -48,8 +47,8 @@ datepickers.forEach(picker => {
     const totalDays = endOfMonth.date();
 
     currentMonthSpan.textContent = useJalaali
-        ? currentDate[id].format("jMMMM jYYYY")
-        : currentDate[id].format("MMMM YYYY");
+      ? currentDate[id].format("jMMMM jYYYY")
+      : currentDate[id].format("MMMM YYYY");
 
     for (let i = 0; i < startDay; i++) {
       const emptyCell = document.createElement("div");
@@ -61,13 +60,15 @@ datepickers.forEach(picker => {
       const dayCell = document.createElement("div");
       dayCell.className = "day";
       dayCell.textContent = i;
+
       dayCell.addEventListener("click", () => {
         const selectedDate = currentDate[id].clone().date(i);
         picker.value = useJalaali
-            ? selectedDate.format("jYYYY/jMM/jDD")
-            : selectedDate.format("YYYY/MM/DD");
+          ? selectedDate.format("jYYYY/jMM/jDD")
+          : selectedDate.format("YYYY/MM/DD");
         calendarContainer.style.display = "none";
       });
+
       daysContainer.appendChild(dayCell);
     }
   }
@@ -100,15 +101,15 @@ datepickers.forEach(picker => {
   toggleDateBtn.addEventListener("click", () => {
     useJalaali = !useJalaali;
     toggleDateBtn.innerHTML = useJalaali
-        ? `Lunar <i class='bx bxs-moon'></i>`
-        : `Solar <i class='bx bxs-sun'></i>`;
+      ? `Lunar <i class='bx bxs-moon'></i>`
+      : `Solar <i class='bx bxs-sun'></i>`;
     switchCalendarType();
   });
 
   function switchCalendarType() {
     currentDate[id] = useJalaali
-        ? moment(currentDate[id].format("YYYY-MM-DD"), "YYYY-MM-DD").locale("fa")
-        : moment(currentDate[id].format("jYYYY/jMM/jDD"), "jYYYY/jMM/jDD").locale("en");
+      ? moment(currentDate[id].format("YYYY-MM-DD"), "YYYY-MM-DD").locale("fa")
+      : moment(currentDate[id].format("jYYYY/jMM/jDD"), "jYYYY/jMM/jDD").locale("en");
     renderCalendar();
   }
 
